@@ -3,13 +3,32 @@ package br.edu.ifspcjo.ads.dw2a6.IFitness.Model;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name = "user")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
 	private String password;
+	@Column(name = "birth_date")
+	@JsonFormat(pattern =  "dd/MM/yyyy")
 	private LocalDate birthday;
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
 	public Long getId() {
