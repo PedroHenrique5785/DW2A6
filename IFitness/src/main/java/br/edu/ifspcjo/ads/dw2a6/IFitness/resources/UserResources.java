@@ -1,36 +1,46 @@
 package br.edu.ifspcjo.ads.dw2a6.IFitness.resources;
 
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifspcjo.ads.dw2a6.IFitness.Model.Gender;
+
 import br.edu.ifspcjo.ads.dw2a6.IFitness.Model.User;
+import br.edu.ifspcjo.ads.dw2a6.IFitness.repository.UserRepository;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
+@RequestMapping("/users")
 public class UserResources {
 
-	@GetMapping("/users")
+	@Autowired
+	private UserRepository userRepository;
+	
+	@GetMapping
 	public List<User> list(){
-		User user1 = new User();
-		user1.setId(1L);
-		user1.setName("Pedro");
-		user1.setEmail("chaves.pedro@");
-		user1.setPassword("1234");
-		user1.setBirthday(LocalDate.of(2003, 3, 22));
-		user1.setGender(Gender.MASCULINO);
-		
-		User user2 = new User();
-		user2.setId(1L);
-		user2.setName("Pedro");
-		user2.setEmail("chaves.pedro@");
-		user2.setPassword("1234");
-		user2.setBirthday(LocalDate.of(2003, 3, 22));
-		user2.setGender(Gender.MASCULINO);
-		
-		return Arrays.asList(user1, user2);
+		return userRepository.findAll();
+	}
+	
+	@PostMapping
+	public User create(@RequestBody User user, HttpServletResponse response) {
+		return userRepository.save(user);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<User> findById(@PathVariable Long id){
+		Optional<User> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			return ResponseEntity.ok(user.get());
+		}
+		return ResponseEntity.notFound().build();
 	}
 }
