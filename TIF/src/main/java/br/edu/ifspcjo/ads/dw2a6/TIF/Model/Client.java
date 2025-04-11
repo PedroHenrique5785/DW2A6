@@ -2,11 +2,17 @@ package br.edu.ifspcjo.ads.dw2a6.TIF.Model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 
 @Entity
@@ -16,10 +22,18 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotNull
+	@Size (min=3, max=50)
 	private String name;
+	@NotNull
+	@Email
 	private String email;
 	private String telephone_number;
+	@NotNull
+	@CPF
 	private String CPF;
+	@Embedded
+	private Endereço endereço;
 	private Boolean active;
 
 

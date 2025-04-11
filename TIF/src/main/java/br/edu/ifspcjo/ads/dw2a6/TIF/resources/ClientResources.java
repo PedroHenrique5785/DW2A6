@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifspcjo.ads.dw2a6.TIF.Model.Client;
 import br.edu.ifspcjo.ads.dw2a6.TIF.repository.ClientRepository;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/clients")
@@ -30,7 +31,7 @@ public class ClientResources {
 	}
 	
 	@PostMapping
-	public Client create(@RequestBody Client client, HttpServletResponse response) {
+	public Client create(@Valid @RequestBody Client client, HttpServletResponse response) {
 		return clientRepository.save(client);
 	}
 	
