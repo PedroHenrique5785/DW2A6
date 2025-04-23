@@ -1,6 +1,5 @@
 package br.edu.ifspcjo.ads.dw2a6.IFitness.resources;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -13,34 +12,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifspcjo.ads.dw2a6.IFitness.model.User;
-import br.edu.ifspcjo.ads.dw2a6.IFitness.repository.UserRepository;
-import jakarta.servlet.http.HttpServletResponse;
+import br.edu.ifspcjo.ads.dw2a6.IFitness.model.Activity;
+import br.edu.ifspcjo.ads.dw2a6.IFitness.repository.ActivityRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/users")
-public class UserResources {
+@RequestMapping("/activities")
+public class ActivityResource {
 
 	@Autowired
-	private UserRepository userRepository;
+	private ActivityRepository activityRepository;
 	
 	@GetMapping
-	public List<User> list(){
-		return userRepository.findAll();
-	}
-	
-	@PostMapping
-	public User create(@Valid @RequestBody User user, HttpServletResponse response) {
-		return userRepository.save(user);
+	public List<Activity> list(){
+		return activityRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id){
-		Optional<User> user = userRepository.findById(id);
-		if(user.isPresent()) {
-			return ResponseEntity.ok(user.get());
+	public ResponseEntity<Activity> findById(@PathVariable Long id) {
+		Optional<Activity> activity = activityRepository.findById(id);
+		if(activity.isPresent()) {
+			return ResponseEntity.ok(activity.get());
 		}
 		return ResponseEntity.notFound().build();
+	}
+	
+	@PostMapping
+	public Activity create(@Valid @RequestBody Activity activity) {
+		return activityRepository.save(activity);
 	}
 }

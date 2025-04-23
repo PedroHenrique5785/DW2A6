@@ -1,4 +1,4 @@
-package br.edu.ifspcjo.ads.dw2a6.IFitness.Model;
+package br.edu.ifspcjo.ads.dw2a6.IFitness.model;
 
 import java.time.LocalDate;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package br.edu.ifspcjo.ads.dw2a6.IFitness.Model;
+package br.edu.ifspcjo.ads.dw2a6.IFitness.model;
 
 public enum Gender {
 
