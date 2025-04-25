@@ -4,6 +4,13 @@ CREATE TABLE `client` (
   `email` varchar(50) NOT NULL,
   `telephone_number` varchar(25) NOT NULL,
   `CPF` varchar(14) NOT NULL,
+  `logradouro` varchar(20),
+  `numero` varchar(20),
+  `complemento` varchar(20),
+  `bairro` varchar(20),
+  `cidade` varchar(20),
+  `estado` varchar(20),
+  `cep` varchar(20),
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
