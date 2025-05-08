@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import br.edu.ifspcjo.ads.dw2a6.IFitness.service.exception.NonExistentOrInactiveUserException;
+
 @ControllerAdvice
 public class IfitnessExceptionHandler extends ResponseEntityExceptionHandler{
 	
@@ -80,5 +82,14 @@ public class IfitnessExceptionHandler extends ResponseEntityExceptionHandler{
 		List<Error> errors = Arrays.asList(new Error(userMessage, developerMessage));
 		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
+	
+	@ExceptionHandler({ NonExistentOrInactiveUserException.class } )
+	public ResponseEntity<Object> handleNonExistentOrInactiveUserException(NonExistentOrInactiveUserException ex) {
+		String userMessage = messageSource.getMessage("user.non-existent-or-inactive", null, LocaleContextHolder.getLocale());
+		String developerMessage = ExceptionUtils.getRootCauseMessage(ex);
+		List<Error> errors = Arrays.asList(new Error(userMessage, developerMessage));
+		return ResponseEntity.badRequest().body(errors);
+	}
+
 
 }
