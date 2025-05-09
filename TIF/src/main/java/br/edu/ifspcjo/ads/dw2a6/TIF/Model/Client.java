@@ -35,6 +35,7 @@ public class Client {
 	@Embedded
 	private Endereço endereço;
 	private Boolean active;
+	
 
 
 

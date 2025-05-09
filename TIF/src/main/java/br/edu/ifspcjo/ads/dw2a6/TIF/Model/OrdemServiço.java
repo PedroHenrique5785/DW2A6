@@ -14,7 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -42,10 +41,6 @@ public class OrdemServiço {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
-	@NotNull
-	@OneToOne(optional = false)
-	@JoinColumn(name = "forma_pagamento_id")
-	private FormaPagamento formaPagamento;
 	
 	public Long getId() {
 		return id;
@@ -95,13 +90,6 @@ public class OrdemServiço {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public FormaPagamento getFormaPagamento() {
-		return formaPagamento;
-	}
-	public void setFormaPagamento(FormaPagamento formaPagamento) {
-		this.formaPagamento = formaPagamento;
-	}
-	
 	
 	@Override
 	public int hashCode() {
